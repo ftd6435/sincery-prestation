@@ -2,7 +2,7 @@ import type { Availability, Product } from '../types/catalog';
 
 export function formatPrice(price: number | null): string {
   if (price === null) return 'Prix sur devis';
-  return `${price.toLocaleString('fr-FR')} F CFA`;
+  return `${price.toLocaleString('fr-FR')} GNF`;
 }
 
 export function formatDate(iso: string): string {

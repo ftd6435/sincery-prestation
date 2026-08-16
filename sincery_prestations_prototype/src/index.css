@@ -1,0 +1,24 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  line-height: 1.6;
+  background-color: hsla(0, 0%, 98%, 1);
+  color: rgba(0, 0, 0, 0.9);
+}
+.inset-panel {
+  background-color: rgba(193, 39, 45, 0.05);
+}
+:focus-visible {
+  outline: 2px solid #c1272d;
+  outline-offset: 2px;
+}

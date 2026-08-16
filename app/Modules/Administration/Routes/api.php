@@ -9,7 +9,14 @@ Route::prefix('v1/auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::middleware('auth:sanctum')->prefix('v1/auth')->group(function () {
+Route::middleware(['auth:sanctum'])->prefix('v1/auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::match(['put', 'patch'], '/me', [AuthController::class, 'UpdateProfile']);
+    Route::put('/me', [AuthController::class, 'updateProfile']);
+    Route::put('/password', [AuthController::class, 'updatePassword']);
+    Route::get('/me', [AuthController::class, 'me']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('v1/admin')->group(function () {
+    Route::patch('/switch-status/{user_id}', [AuthController::class, 'switchStatus']);
+    Route::get('/users', [AuthController::class, 'users']);
 });

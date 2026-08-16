@@ -1,9 +1,57 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+@source '../js/**/*.{js,ts,jsx,tsx}';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, sans-serif;
+
+    --color-brand: #c1272d;
+    --color-brand-dark: #a01f24;
+    --color-brand-light: #e53238;
+
+    --color-surface-page: hsla(0, 0%, 98%, 1);
+    --color-surface-alt: hsla(0, 0%, 97%, 1);
+
+    --color-line: #e5e7eb;
+
+    --color-success: #10b981;
+    --color-success-bg: #d1fae5;
+    --color-danger: #ef4444;
+    --color-danger-bg: #fee2e2;
+    --color-warning: #f59e0b;
+    --color-warning-bg: #fef3c7;
+    --color-info: #3b82f6;
+    --color-info-bg: #dbeafe;
+
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-glow: 0 4px 16px rgba(193, 39, 45, 0.25);
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    line-height: 1.6;
+    background-color: hsla(0, 0%, 98%, 1);
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.inset-panel {
+    background-color: rgba(193, 39, 45, 0.05);
+}
+
+:focus-visible {
+    outline: 2px solid #c1272d;
+    outline-offset: 2px;
 }

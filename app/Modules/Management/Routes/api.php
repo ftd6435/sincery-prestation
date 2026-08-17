@@ -122,9 +122,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Partners (admin)
     // ————————————————————————————————————————
     Route::prefix('v1/partners')->group(function () {
-        Route::get('trashed/list', [PartnerControler::class, 'trashed']);
-        Route::post('restore/{post}', [PartnerControler::class, 'restore']);
-        Route::delete('force-delete/{post}', [PartnerControler::class, 'forceDelete']);
+        Route::get('trashed/list', [PartnerController::class, 'trashed']);
+        Route::post('restore/{partner}', [PartnerController::class, 'restore']);
+        Route::delete('force-delete/{partner}', [PartnerController::class, 'forceDelete']);
     });
     Route::apiResource('v1/partners', PartnerController::class)->except(['index', 'show']);
 });

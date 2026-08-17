@@ -152,6 +152,7 @@ class SettingController extends Controller
     {
         try {
             Cache::forget(self::CACHE_KEY);
+            Setting::flushCompanyCache();
         } catch (\Throwable) {
             // Cache driver may not be configured in dev — ignore silently
         }

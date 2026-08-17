@@ -3,6 +3,7 @@
 namespace App\Modules\Management\Models;
 
 use App\Modules\Administration\Models\User;
+use App\Modules\ERP\Models\QuoteItem;
 use App\Modules\Settings\Models\Category;
 use App\Traits\CloudflareUpload;
 use Illuminate\Database\Eloquent\Model;
@@ -74,6 +75,11 @@ class Product extends Model
     public function attributes()
     {
         return $this->hasMany(ProductAttribute::class, 'product_id');
+    }
+
+    public function quoteItems()
+    {
+        return $this->hasMany(QuoteItem::class, 'product_id');
     }
 
     public function createdBy()

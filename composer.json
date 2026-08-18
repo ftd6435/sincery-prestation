@@ -8,13 +8,15 @@
     "require": {
         "php": "^8.3",
         "dompdf/dompdf": "^3.0",
+        "geoip2/geoip2": "^3.4",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^13.8",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "league/flysystem-aws-s3-v3": "^3.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "stevebauman/purify": "^6.3"
+        "stevebauman/purify": "^6.3",
+        "torann/geoip": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

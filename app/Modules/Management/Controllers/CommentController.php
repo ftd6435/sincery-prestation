@@ -40,6 +40,13 @@ class CommentController extends Controller
         return $this->successResponse($comment, "Commentaire statut changé avec succès.");
     }
 
+    public function show(Comment $comment)
+    {
+        $comment->loadMissing(['post', 'parent', 'children']);
+
+        return $this->successResponse($comment, "Commentaire chargé avec succès.");
+    }
+
     public function destroy(Comment $comment)
     {
         $comment->delete();

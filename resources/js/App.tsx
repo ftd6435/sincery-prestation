@@ -29,9 +29,12 @@ import { AdminOrders } from './pages/admin/AdminOrders';
 import { AdminQuotes } from './pages/admin/AdminQuotes';
 import { AdminArticles } from './pages/admin/AdminArticles';
 import { AdminPartners } from './pages/admin/AdminPartners';
+import { AdminPartnerCategories } from './pages/admin/AdminPartnerCategories';
+import { AdminComments } from './pages/admin/AdminComments';
 import { AdminMessages } from './pages/admin/AdminMessages';
 import { AdminUsers } from './pages/admin/AdminUsers';
 import { AdminSettings } from './pages/admin/AdminSettings';
+import { AdminProfile } from './pages/admin/AdminProfile';
 
 export function App() {
   return (
@@ -71,7 +74,7 @@ export function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
 
-            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin"
               element={
@@ -90,10 +93,13 @@ export function App() {
               <Route path="commandes" element={<AdminOrders />} />
               <Route path="devis" element={<AdminQuotes />} />
               <Route path="actualites" element={<AdminArticles />} />
+              <Route path="commentaires" element={<AdminComments />} />
               <Route path="partenaires" element={<AdminPartners />} />
+              <Route path="partenaires-categories" element={<AdminPartnerCategories />} />
               <Route path="messages" element={<AdminMessages />} />
               <Route path="utilisateurs" element={<AdminUsers />} />
               <Route path="parametres" element={<AdminSettings />} />
+              <Route path="profil" element={<AdminProfile />} />
             </Route>
           </Routes>
 

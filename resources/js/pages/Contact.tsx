@@ -115,7 +115,7 @@ export function Contact() {
               required
               value={values.name}
               error={errors.name}
-              onChange={(v) => change('name', v)} />
+              onChange={(v: string) => change('name', v)} />
 
               <TextField
               label="Email"
@@ -124,14 +124,14 @@ export function Contact() {
               required
               value={values.email}
               error={errors.email}
-              onChange={(v) => change('email', v)} />
+              onChange={(v: string) => change('email', v)} />
 
               <TextField
               label="Téléphone"
               name="phone"
               type="tel"
               value={values.phone}
-              onChange={(v) => change('phone', v)} />
+              onChange={(v: string) => change('phone', v)} />
 
               <TextField
               label="Sujet"
@@ -139,7 +139,7 @@ export function Contact() {
               required
               value={values.subject}
               error={errors.subject}
-              onChange={(v) => change('subject', v)}
+              onChange={(v: string) => change('subject', v)}
               placeholder="Demande d’information, partenariat…" />
 
               <TextAreaField
@@ -150,7 +150,7 @@ export function Contact() {
               className="sm:col-span-2"
               value={values.message}
               error={errors.message}
-              onChange={(v) => change('message', v)} />
+              onChange={(v: string) => change('message', v)} />
 
               <div className="sm:col-span-2">
                 <Button type="submit">

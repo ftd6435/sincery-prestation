@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('address')->nullable();
             $table->string('logo')->nullable();
-            $table->url('website')->nullable();
+            $table->string('website')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();

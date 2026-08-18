@@ -23,6 +23,8 @@ class Product extends Model
         'short_description',
         'description',
         'price',
+        'stock',
+        'low_stock_threshold',
         'is_quote_only',
         'unit',
         'is_featured',
@@ -38,6 +40,8 @@ class Product extends Model
 
     protected $casts = [
         'price' => 'decimal:2',
+        'stock' => 'integer',
+        'low_stock_threshold' => 'integer',
         'published_at' => 'datetime',
         'is_available' => 'boolean',
         'is_published' => 'boolean',

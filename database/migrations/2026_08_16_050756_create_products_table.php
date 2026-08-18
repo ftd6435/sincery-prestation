@@ -33,8 +33,6 @@ return new class extends Migration
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
-
-            $table->index(['reference', 'name', 'short_description', 'description', 'is_available'], 'idx_products_table');
         });
     }
 

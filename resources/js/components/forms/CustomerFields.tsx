@@ -49,13 +49,13 @@ export function CustomerFields({
         required
         value={values.fullName}
         error={errors.fullName}
-        onChange={(v) => onChange('fullName', v)} />
+        onChange={(v: string) => onChange('fullName', v)} />
 
       <TextField
         label="Entreprise"
         name="company"
         value={values.company}
-        onChange={(v) => onChange('company', v)} />
+        onChange={(v: string) => onChange('company', v)} />
 
       <TextField
         label="Téléphone"
@@ -64,7 +64,7 @@ export function CustomerFields({
         required
         value={values.phone}
         error={errors.phone}
-        onChange={(v) => onChange('phone', v)} />
+        onChange={(v: string) => onChange('phone', v)} />
 
       <TextField
         label="Email"
@@ -73,26 +73,26 @@ export function CustomerFields({
         required
         value={values.email}
         error={errors.email}
-        onChange={(v) => onChange('email', v)} />
+        onChange={(v: string) => onChange('email', v)} />
 
       <TextField
         label="Adresse"
         name="address"
         className="sm:col-span-2"
         value={values.address}
-        onChange={(v) => onChange('address', v)} />
+        onChange={(v: string) => onChange('address', v)} />
 
       <TextField
         label="Ville"
         name="city"
         value={values.city}
-        onChange={(v) => onChange('city', v)} />
+        onChange={(v: string) => onChange('city', v)} />
 
       <TextField
         label="Pays"
         name="country"
         value={values.country}
-        onChange={(v) => onChange('country', v)} />
+        onChange={(v: string) => onChange('country', v)} />
 
       {showPreferredContact &&
       <SelectField
@@ -100,7 +100,7 @@ export function CustomerFields({
         name="preferredContact"
         className="sm:col-span-2"
         value={values.preferredContact}
-        onChange={(v) => onChange('preferredContact', v)}
+        onChange={(v: string) => onChange('preferredContact', v)}
         options={['Téléphone', 'Email', 'WhatsApp']} />
 
       }
@@ -110,7 +110,7 @@ export function CustomerFields({
         name="comment"
         className="sm:col-span-2"
         value={values.comment}
-        onChange={(v) => onChange('comment', v)}
+        onChange={(v: string) => onChange('comment', v)}
         placeholder="Précisez vos contraintes, délais, quantités ou références particulières." />
 
     </div>);

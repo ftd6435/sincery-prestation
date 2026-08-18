@@ -24,14 +24,13 @@ export function AdminPageHeader({
 
 export function AdminCard({
   children,
-  className = ''
+  className = '',
+  id
 
-
-
-
-}: {children: ReactNode;className?: string;}) {
+}: { children: ReactNode; className?: string; id?: string }) {
   return (
     <div
+      id={id}
       className={`rounded-lg border border-line bg-white shadow-card ${className}`}>
 
       {children}

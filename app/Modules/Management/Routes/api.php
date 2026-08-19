@@ -32,6 +32,23 @@ Route::prefix('v1/posts')->group(function () {
 });
 
 // ————————————————————————————————————————
+// Post Categories (blog)
+// ————————————————————————————————————————
+Route::prefix('v1/post-categories')->group(function () {
+    Route::get('/', static function () {
+        $categories = \App\Modules\Management\Models\PostCategory::query()
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get(['id', 'name', 'slug', 'description', 'is_active', 'created_at']);
+
+        return response()->json([
+            'success' => true,
+            'data' => $categories,
+        ]);
+    });
+});
+
+// ————————————————————————————————————————
 // Comments (public list + create)
 // ————————————————————————————————————————
 Route::prefix('v1/comments')->group(function () {

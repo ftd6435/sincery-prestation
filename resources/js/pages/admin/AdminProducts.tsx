@@ -140,15 +140,23 @@ export function AdminProducts() {
       setError(null);
       const isTrash = tab === 'trash';
       const endpoint = isTrash ? '/v1/products/trashed/list' : '/v1/products';
-      const [productsData, categoriesData] = await Promise.all([
+      const results = await Promise.allSettled([
         api.get<AdminProduct[]>(endpoint),
         api.get<ProductCategory[]>('/v1/categories'),
       ]);
+      const unwrap = <T,>(r: PromiseSettledResult<T>, fallback: T): T =>
+        r.status === 'fulfilled' ? r.value : fallback;
+      const productsData = unwrap(results[0], [] as AdminProduct[]);
+      const categoriesData = unwrap(results[1], [] as ProductCategory[]);
       setProducts(productsData);
       setCategories(categoriesData);
       if (!isTrash) {
-        const trashed = await api.get<AdminProduct[]>('/v1/products/trashed/list');
-        setTrashCount(trashed.length);
+        try {
+          const trashed = await api.get<AdminProduct[]>('/v1/products/trashed/list');
+          setTrashCount(trashed.length);
+        } catch {
+          setTrashCount(0);
+        }
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';

@@ -102,12 +102,22 @@ export function AdminPartnerCategories() {
     setLoading(true);
     setError(null);
     try {
-      const [listRes, trashedRes] = await Promise.all([
+      const results = await Promise.allSettled([
         api.get<AdminPartnerCategory[] | { data: AdminPartnerCategory[] }>('/v1/partner-categories'),
         api.get<AdminPartnerCategory[] | { data: AdminPartnerCategory[] }>(
           '/v1/partner-categories/trashed/list'
         ),
       ]);
+      const unwrap = <T,>(r: PromiseSettledResult<T>, fallback: T): T =>
+        r.status === 'fulfilled' ? r.value : fallback;
+      const listRes = unwrap(
+        results[0],
+        [] as unknown as AdminPartnerCategory[],
+      );
+      const trashedRes = unwrap(
+        results[1],
+        [] as unknown as AdminPartnerCategory[],
+      );
       setRows(Array.isArray(listRes) ? listRes : (listRes.data ?? []));
       setTrashedRows(Array.isArray(trashedRes) ? trashedRes : (trashedRes.data ?? []));
     } catch (err) {
@@ -170,7 +180,7 @@ export function AdminPartnerCategories() {
     setDrawerSubmitting(true);
     setDrawerErrors({});
     try {
-      const detail = await api.get<AdminPartnerCategory>(`/v1/partner-categories/show/${row.id}`);
+      const detail = await api.get<AdminPartnerCategory>(`/v1/partner-categories/${row.id}`);
       setForm({
         name: detail.name ?? '',
         slug: detail.slug ?? '',

@@ -138,11 +138,16 @@ export function AdminPartners() {
     setLoading(true);
     setError(null);
     try {
-      const [partnersRes, trashedRes, catsRes] = await Promise.all([
+      const results = await Promise.allSettled([
         api.get<AdminPartner[] | { data: AdminPartner[] }>('/v1/partners'),
         api.get<AdminPartner[] | { data: AdminPartner[] }>('/v1/partners/trashed/list'),
         api.get<PartnerCategoryOption[] | { data: PartnerCategoryOption[] }>('/v1/partner-categories'),
       ]);
+      const unwrap = <T,>(r: PromiseSettledResult<T>, fallback: T): T =>
+        r.status === 'fulfilled' ? r.value : fallback;
+      const partnersRes = unwrap(results[0], [] as unknown as AdminPartner[]);
+      const trashedRes = unwrap(results[1], [] as unknown as AdminPartner[]);
+      const catsRes = unwrap(results[2], [] as unknown as PartnerCategoryOption[]);
       setRows(Array.isArray(partnersRes) ? partnersRes : (partnersRes.data ?? []));
       setTrashedRows(Array.isArray(trashedRes) ? trashedRes : (trashedRes.data ?? []));
       setCategories(Array.isArray(catsRes) ? catsRes : (catsRes.data ?? []));
@@ -209,7 +214,7 @@ export function AdminPartners() {
     setDrawerSubmitting(true);
     setDrawerErrors({});
     try {
-      const detail = await api.get<AdminPartner>(`/v1/partners/show/${row.id}`);
+      const detail = await api.get<AdminPartner>(`/v1/partners/${row.id}`);
       setForm({
         name: detail.name ?? '',
         slug: detail.slug ?? '',

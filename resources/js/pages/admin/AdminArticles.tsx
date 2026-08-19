@@ -146,12 +146,21 @@ export function AdminArticles() {
     setLoading(true);
     setError(null);
     try {
-      const [postsRes, trashedRes, catsRes, usersRes] = await Promise.all([
+      const results = await Promise.allSettled([
         api.get<PostsListResponse>('/v1/posts'),
         api.get<PostsListResponse>('/v1/posts/trashed/list'),
-        api.get<{ data: PostCategoryOption[] }>('/v1/post-categories'),
-        api.get<{ data: AuthorOption[] }>('/v1/users'),
+        api.get<{ data: PostCategoryOption[] } | PostCategoryOption[]>('/v1/post-categories'),
+        api.get<{ data: AuthorOption[] } | AuthorOption[]>('/v1/admin/users'),
       ]);
+
+      const unwrap = <T,>(r: PromiseSettledResult<T>, fallback: T): T =>
+        r.status === 'fulfilled' ? r.value : fallback;
+
+      const postsRes = unwrap<PostsListResponse>(results[0], [] as unknown as PostsListResponse);
+      const trashedRes = unwrap<PostsListResponse>(results[1], [] as unknown as PostsListResponse);
+      const catsRes = unwrap(results[2], [] as unknown as PostCategoryOption[]);
+      const usersRes = unwrap(results[3], [] as unknown as AuthorOption[]);
+
       setRows(Array.isArray(postsRes) ? postsRes : (postsRes.data ?? []));
       setTrashedRows(Array.isArray(trashedRes) ? trashedRes : (trashedRes.data ?? []));
       setCategories(Array.isArray(catsRes) ? catsRes : (catsRes.data ?? []));
@@ -219,7 +228,7 @@ export function AdminArticles() {
     setDrawerSubmitting(true);
     setDrawerErrors({});
     try {
-      const detail = await api.get<AdminPost>(`/v1/posts/show/${row.id}`);
+      const detail = await api.get<AdminPost>(`/v1/posts/${row.id}`);
       setForm({
         title: detail.title ?? '',
         slug: detail.slug ?? '',

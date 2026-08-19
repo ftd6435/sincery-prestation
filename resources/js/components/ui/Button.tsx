@@ -97,8 +97,24 @@ export function Button(props: ButtonProps | LinkProps | AnchorProps) {
   );
 
   if ('to' in props && props.to) {
+    const linkProps = props as LinkProps;
+    const rest: Record<string, unknown> = {};
+    for (const key of Object.keys(linkProps)) {
+      if (
+        key !== 'variant' &&
+        key !== 'size' &&
+        key !== 'className' &&
+        key !== 'children' &&
+        key !== 'loading' &&
+        key !== 'iconLeft' &&
+        key !== 'iconRight' &&
+        key !== 'to'
+      ) {
+        rest[key] = (linkProps as unknown as Record<string, unknown>)[key];
+      }
+    }
     return (
-      <Link to={(props as LinkProps).to} className={classes} aria-disabled={loading || undefined}>
+      <Link to={linkProps.to} className={classes} aria-disabled={loading || undefined} {...rest}>
         <InnerContent
           loading={loading}
           iconLeft={iconLeft}
@@ -110,9 +126,24 @@ export function Button(props: ButtonProps | LinkProps | AnchorProps) {
   }
 
   if ('href' in props && props.href) {
-    const { href, ...rest } = props as AnchorProps;
+    const anchorProps = props as AnchorProps;
+    const rest: Record<string, unknown> = {};
+    for (const key of Object.keys(anchorProps)) {
+      if (
+        key !== 'variant' &&
+        key !== 'size' &&
+        key !== 'className' &&
+        key !== 'children' &&
+        key !== 'loading' &&
+        key !== 'iconLeft' &&
+        key !== 'iconRight' &&
+        key !== 'href'
+      ) {
+        rest[key] = (anchorProps as unknown as Record<string, unknown>)[key];
+      }
+    }
     return (
-      <a href={href} className={classes} aria-disabled={loading || undefined} {...rest}>
+      <a href={anchorProps.href} className={classes} aria-disabled={loading || undefined} {...rest}>
         <InnerContent
           loading={loading}
           iconLeft={iconLeft}
@@ -123,11 +154,26 @@ export function Button(props: ButtonProps | LinkProps | AnchorProps) {
     );
   }
 
-  const { ...rest } = props as ButtonProps;
+  const btnProps = props as ButtonProps;
+  const rest: Record<string, unknown> = {};
+  for (const key of Object.keys(btnProps)) {
+    if (
+      key !== 'variant' &&
+      key !== 'size' &&
+      key !== 'className' &&
+      key !== 'children' &&
+      key !== 'loading' &&
+      key !== 'iconLeft' &&
+      key !== 'iconRight'
+    ) {
+      rest[key] = (btnProps as unknown as Record<string, unknown>)[key];
+    }
+  }
+  const disabled = (rest.disabled as boolean | undefined) || loading || undefined;
   return (
     <button
       className={classes}
-      disabled={rest.disabled || loading || undefined}
+      disabled={disabled}
       aria-busy={loading || undefined}
       {...rest}
     >
